@@ -1,61 +1,142 @@
 # 1.- Escribe una función que reciba una cadena de texto como parámetro y devuelva un diccionario con las frecuencias de cada letra en la cadena. Los espacios no deben ser considerados.
 
-
+#El ejercicio no dice nada de los símbolos así que solo tendremos en cuenta las letras
+def contador_letras(texto):
+    diccionario = dict()
+    for letra in texto:
+        if letra.isalpha():
+            if not letra.lower() in diccionario.keys():
+                diccionario[letra] = 1
+            else:
+                diccionario[letra] += 1
+    return diccionario
 
 # 2.- Dada una lista de números, obtén una nueva lista con el doble de cada valor. Usa la función map().
 
+numeros = [1, 2, 3, 4]
 
+def doblar_numero(numero):
+    return numero*2
+
+dobles = list(map(doblar_numero, numeros))
 
 # 3.- Escribe una función que tome una lista de palabras y una palabra objetivo como parámetros. La función debe devolver una lista con todas las palabras de la lista original que contengan la palabra objetivo.
 
-
+def buscar_palabra(texto, objetivo):
+    palabras = texto.split(" ")
+    resultado = list()
+    for palabra in palabras:
+        if objetivo.lower() in palabra.lower():
+            resultado.append(palabra)
+    return set(resultado)
 
 # 4.- Genera una función que calcule la diferencia entre los valores de dos listas. Usa la función map().
 
-
+def restar_listas(lista_1, lista_2):
+    resultado = list(map(lambda x, y: x-y, lista_1, lista_2))
+    return resultado
 
 # 5.- Escribe una función que tome una lista de números como parámetro y un valor opcional nota_aprobado (por defecto 5). La función debe calcular la media de los números en la lista y determinar si la media es mayor o igual que nota_aprobado. Si es así, el estado será "aprobado"; de lo contrario, "suspenso". La función debe devolver una tupla que contenga la media y el estado.
 
-
+def media_aprobada(notas, nota_aprobado=5):
+    suma = 0
+    for numero in notas:
+        suma += numero
+    media = suma / len(notas)
+    if media >= nota_aprobado:
+        return (media, "aprobado")
+    else:
+        return (media, "suspenso")
 
 # 6.- Escribe una función que calcule el factorial de un número de manera recursiva.
 
-
+def factorial(numero):
+    if numero > 1:
+        resultado = numero * factorial(numero-1)
+        return resultado
+    else:
+        return numero
 
 # 7.- Genera una función que convierta una lista de tuplas a una lista de strings. Usa la función map().
 
-
+def convertir_a_lista_strings(lista_tuplas):
+    lista = list(map(lambda x: " ".join(x), lista_tuplas))
+    return lista
 
 # 8.- Escribe un programa que pida al usuario dos números e intente dividirlos. Si el usuario ingresa un valor no numérico o intenta dividir por cero, maneja esas excepciones de manera adecuada y muestra un mensaje indicando si la división fue exitosa o no.
 
-
+def dividir_numeros(numero_1, numero_2):
+    try:
+        resultado = float(numero_1) / float(numero_2)
+        return f"El resultado de dividir {numero_1} y {numero_2} es: {resultado}"
+    except ValueError:
+        return "El numerador o el denominador no eran números válidos"
+    except ZeroDivisionError:
+        return "No se puede dividir entre cero"
+    
+'''numero_1 = input("Escribe el numerador de la división:")
+numero_2 = input("Escribe el denominador de la división:")
+    
+print(dividir_numeros(numero_1, numero_2))'''
 
 # 9.- Escribe una función que tome una lista de nombres de mascotas como parámetro y devuelva una nueva lista excluyendo ciertas mascotas prohibidas en España. La lista de mascotas a excluir es ["Mapache", "Tigre", "Serpiente Pitón", "Cocodrilo", "Oso"]. Usa la función filter().
 
-
+def filtar_mascotas(mascotas):
+    mascotas_prohibidas = ["Mapache", "Tigre", "Serpiente Pitón", "Cocodrilo", "Oso"]
+    mascotas_filtradas = list(filter(lambda x: x not in mascotas_prohibidas, mascotas))
+    return mascotas_filtradas
 
 # 10.-Escribe una función que reciba una lista de números y calcule su promedio. Si la lista está vacía, lanza una excepción personalizada y maneja el error adecuadamente.
 
-
+def media_numeros(numeros):
+    suma = 0
+    for numero in numeros:
+        suma += numero
+    try:
+        media = suma / len(numeros)
+    except ZeroDivisionError:
+        return "La lista está vacía"
+    return media
 
 # 11.- Escribe un programa que pida al usuario que introduzca su edad. Si el usuario ingresa un valor no numérico o un valor fuera del rango esperado (por ejemplo, menor que 0 o mayor que 120), maneja las excepciones adecuadamente.
 
+def comprobar_edad(edad):
+    try:
+        if int(edad) < 0:
+            return "No puedes tener menos de 0 años."
+        elif int(edad) > 120:
+            return "No puedes tener mas de 120 años."
+        else:
+            return f"Tienes {edad} años."
+    except ValueError:
+        return "Introduce una edad válida."
 
+'''edad = input("Introduce tu edad")
+print(comprobar_edad(edad))'''
 
 # 12.- Genera una función que, al recibir una frase, devuelva una lista con la longitud de cada palabra. Usa la función map().
 
-
+def contar_letras_palabra(texto):
+    lista_palabras = texto.split()
+    resultado = list(map(len, lista_palabras))
+    return resultado
 
 # 13.- Genera una función que, para un conjunto de caracteres, devuelva una lista de tuplas con cada letra en mayúsculas y minúsculas. Las letras no pueden estar repetidas. Usa la función map().
 
+def lower_y_upper(palabra):
+    resultado = list(set(map(lambda x: (x.lower(), x.upper()), palabra)))
+    return resultado
 
 # 14.- Crea una función que retorne las palabras de una lista que comiencen con una letra en específico. Usa la función filter().
 
-
+def comienza_por(palabras, letra):
+    palabras_filtradas = list(filter(lambda x: x[0].lower() == letra.lower(), palabras))
+    return palabras_filtradas
 
 # 15.- Crea una función lambda que sume 3 a cada número de una lista dada.
 
-
+numeros = [1, 2, 3, 4, 5]
+sumar_tres = list(map(lambda x: x+3, numeros))
 
 # 16.- Escribe una función que tome una cadena de texto y un número entero n como parámetros y devuelva una lista de todas las palabras que sean más largas que n. Usa la función filter().
 
